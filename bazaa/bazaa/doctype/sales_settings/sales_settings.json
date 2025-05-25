@@ -1,0 +1,77 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-24 13:11:59.621245",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "default_warehouse",
+  "default_payment_gateway",
+  "column_break_sdtw",
+  "default_mode_of_payment",
+  "default_gateway_account"
+ ],
+ "fields": [
+  {
+   "fieldname": "default_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_mode_of_payment",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Mode of Payment",
+   "options": "Mode of Payment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_sdtw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_gateway_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Gateway Account",
+   "options": "Payment Gateway Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_payment_gateway",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Payment Gateway",
+   "options": "Payment Gateway",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-05-25 10:30:53.480218",
+ "modified_by": "Administrator",
+ "module": "Bazaa",
+ "name": "Sales Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
