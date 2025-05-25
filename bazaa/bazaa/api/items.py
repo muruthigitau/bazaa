@@ -43,10 +43,10 @@ def items():
     """Return all items with selected fields, optionally filtered"""
     filters = frappe._dict(frappe.request.args)
 
-    # Remove system-level parameters that shouldn't be in filters
+   
     filters.pop("cmd", None)
 
-    # Decode any JSON string values if necessary
+   
     for key, value in filters.items():
         if isinstance(value, str):
             try:
@@ -77,7 +77,7 @@ def item_detail(name):
     """Return a single item by name or item_code"""
     item = frappe.get_all(
         "Item",
-        filters={"name": name},  # You can change to item_code or add fallback logic
+        filters={"name": name}, 
         fields=[
             "name",
             "item_code",
