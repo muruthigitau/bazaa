@@ -96,7 +96,7 @@ def initiate_payment_request():
 
 @frappe.whitelist(allow_guest=True)
 def check_status(id):
-    frappe.set_user("Guest")
+    frappe.set_user("Administrator")
     frappe.flags.ignore_permissions = True
 
     if not id:
@@ -125,7 +125,7 @@ def check_status(id):
         
 @frappe.whitelist(allow_guest=True)
 def reinitiate_stkpush(id):
-    frappe.set_user("Guest")
+    frappe.set_user("Administrator")
     frappe.flags.ignore_permissions = True
 
     if not id:

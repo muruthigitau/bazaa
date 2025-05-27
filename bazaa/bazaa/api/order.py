@@ -237,51 +237,110 @@ def get_customer_primary_address(customer_name):
 
 
 def get_sales_order_payments(order_name):
-    """Returns all payments connected to a sales order with totals"""
+    """Returns all payments and related invoices (with items) connected to a sales order"""
     from frappe import throw, _
-
+    
     if not order_name:
         throw(_("Order name is required"))
     
-    # Get sales order
     so = frappe.get_doc("Sales Order", order_name)
-    
-    # Get all Payment Entries linked to this sales order
-    payment_entries = frappe.get_all(
+
+    # === STEP 1: Get Sales Invoices referencing the Sales Order via items ===
+    invoice_items = frappe.get_all(
+        "Sales Invoice Item",
+        filters={
+            "sales_order": order_name,
+            "docstatus": 1
+        },
+        fields=["parent", "item_code", "item_name", "qty", "rate", "amount"]
+    )
+
+    invoice_map = {}
+    for item in invoice_items:
+        if item.parent not in invoice_map:
+            invoice_map[item.parent] = {
+                "invoice_id": item.parent,
+                "items": []
+            }
+        invoice_map[item.parent]["items"].append({
+            "item_code": item.item_code,
+            "item_name": item.item_name,
+            "qty": item.qty,
+            "rate": item.rate,
+            "amount": item.amount
+        })
+
+    invoice_details = []
+    invoice_names = list(invoice_map.keys())
+
+    for invoice_id, data in invoice_map.items():
+        invoice_doc = frappe.get_doc("Sales Invoice", invoice_id)
+        invoice_details.append({
+            "invoice_id": invoice_doc.name,
+            "posting_date": invoice_doc.posting_date.strftime("%Y-%m-%d") if invoice_doc.posting_date else "",
+            "grand_total": invoice_doc.grand_total,
+            "currency": invoice_doc.currency,
+            "items": data["items"]
+        })
+
+    # === STEP 2: Get Payment Entries for Sales Order ===
+    payment_entries_so = frappe.get_all(
         "Payment Entry Reference",
         filters={
             "reference_doctype": "Sales Order",
             "reference_name": order_name,
-            "docstatus": 1  # Only submitted payments
+            "docstatus": 1
         },
-        fields=["parent", "allocated_amount"],
+        fields=["parent", "reference_doctype", "reference_name", "allocated_amount"],
         order_by="creation"
     )
-    
-    # Get payment details
+
+    # === STEP 3: Get Payment Entries for Sales Invoices ===
+    payment_entries_si = []
+    if invoice_names:
+        payment_entries_si = frappe.get_all(
+            "Payment Entry Reference",
+            filters={
+                "reference_doctype": "Sales Invoice",
+                "reference_name": ["in", invoice_names],
+                "docstatus": 1
+            },
+            fields=["parent", "reference_doctype", "reference_name", "allocated_amount"],
+            order_by="creation"
+        )
+
+    all_payment_entries = payment_entries_so + payment_entries_si
+
+    # === STEP 4: Process Payments ===
     payments = []
     total_paid = 0
-    
-    for entry in payment_entries:
+    seen_parents = set()
+
+    for entry in all_payment_entries:
+        if entry.parent in seen_parents:
+            continue
+        seen_parents.add(entry.parent)
+
         payment = frappe.get_doc("Payment Entry", entry.parent)
         payments.append({
             "payment_id": payment.name,
+            "reference_doctype": entry.reference_doctype,
+            "reference_name": entry.reference_name,
             "amount": entry.allocated_amount,
             "payment_date": payment.posting_date.strftime("%Y-%m-%d") if payment.posting_date else "",
             "payment_mode": payment.mode_of_payment,
             "status": payment.status
         })
         total_paid += entry.allocated_amount
-    
-    # Calculate balance
+
+    # === STEP 5: Final response ===
     balance = so.grand_total - total_paid
-    
+
     return {
         "order_total": so.grand_total,
         "total_paid": total_paid,
         "balance": balance,
         "payments": payments,
-        "currency": so.currency
+        "currency": so.currency,
+        "sales_invoices": invoice_details
     }
-    
-        
