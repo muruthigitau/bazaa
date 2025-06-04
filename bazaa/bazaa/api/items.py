@@ -87,8 +87,11 @@ def item_detail(name):
             "item_name",
             "item_group",
             "image",
-            "price",
+             "price",
             "old_price",
+            "discount",
+            "vat_price",
+            "additional_cost",
             "description",
             "summary"
         ],
