@@ -65,6 +65,9 @@ def items():
             "image",
             "price",
             "old_price",
+            "discount",
+            "vat_price",
+            "additional_cost",
             "description",
             "summary"
         ]
