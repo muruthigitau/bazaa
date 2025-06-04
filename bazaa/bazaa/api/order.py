@@ -40,7 +40,7 @@ def create_sales_order():
             sales_order.append("items", {
                 "item_code": item_code,
                 "qty": item_data.get("quantity", 1),
-                "rate": item_data.get("price", 0),
+                "rate": item_data.get("total_price", 0),
                 "delivery_date": frappe.utils.add_days(frappe.utils.nowdate(), 7),
                 "warehouse": default_warehouse 
             })
