@@ -7,6 +7,7 @@
  "field_order": [
   "default_warehouse",
   "default_payment_gateway",
+  "default_email",
   "column_break_sdtw",
   "default_mode_of_payment",
   "default_gateway_account"
@@ -47,13 +48,19 @@
    "label": "Default Payment Gateway",
    "options": "Payment Gateway",
    "reqd": 1
+  },
+  {
+   "fieldname": "default_email",
+   "fieldtype": "Data",
+   "label": "Default Email",
+   "options": "Email"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-05-25 10:30:53.480218",
+ "modified": "2025-06-09 09:17:05.107023",
  "modified_by": "Administrator",
  "module": "Bazaa",
  "name": "Sales Settings",
