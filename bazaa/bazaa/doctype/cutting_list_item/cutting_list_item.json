@@ -1,0 +1,147 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-09 08:54:48.411437",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cutting_dimensions_section",
+  "length",
+  "width",
+  "column_break_xyda",
+  "qty",
+  "description",
+  "section_break_lyqm",
+  "edging_column",
+  "edging_length",
+  "edging_width",
+  "grooves_column",
+  "grooves_length",
+  "grooves_width"
+ ],
+ "fields": [
+  {
+   "fieldname": "cutting_dimensions_section",
+   "fieldtype": "Section Break",
+   "label": "Cutting Dimensions"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "columns": 2,
+   "fieldname": "length",
+   "fieldtype": "Float",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Length"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "columns": 2,
+   "fieldname": "width",
+   "fieldtype": "Float",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Width"
+  },
+  {
+   "fieldname": "column_break_xyda",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "columns": 1,
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Qty"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "section_break_lyqm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "edging_column",
+   "fieldtype": "Column Break",
+   "label": "Edging"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "edging_length",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Edging Length"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "edging_width",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Edging Width"
+  },
+  {
+   "fieldname": "grooves_column",
+   "fieldtype": "Column Break",
+   "label": "Grooves"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "grooves_length",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Grooves Length"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "grooves_width",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Grooves Width"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-09 09:00:46.838839",
+ "modified_by": "Administrator",
+ "module": "Bazaa",
+ "name": "Cutting List Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
