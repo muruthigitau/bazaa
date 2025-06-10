@@ -28,7 +28,8 @@ class CuttingList(Document):
 
 		# Prepare item headers
 		item_headers = ["Length", "Width", "Qty", "Description",
-						"Edging Length", "Edging Width", "Grooves Length", "Grooves Width"]
+						"Edging L1", "Edging L2", "Edging W1", "Edging W2",
+						"Grooves L1", "Grooves L2", "Grooves W1", "Grooves W2"]
 
 		# Prepare item data rows
 		item_rows = []
@@ -38,10 +39,14 @@ class CuttingList(Document):
 				item.width,
 				item.qty,
 				item.description,
-				1 if item.edging_length else 0,
-				1 if item.edging_width else 0,
-				1 if item.grooves_length else 0,
-				1 if item.grooves_width else 0
+				1 if item.edging_l1 else 0,
+				1 if item.edging_l2 else 0,
+				1 if item.edging_w1 else 0,
+				1 if item.edging_w2 else 0,
+				1 if item.grooves_l1 else 0,
+				1 if item.grooves_l2 else 0,
+				1 if item.grooves_w1 else 0,
+				1 if item.grooves_w2 else 0
 			])
 
 		# Combine all into one sheet
@@ -67,4 +72,3 @@ class CuttingList(Document):
 		)
 
 		frappe.msgprint(f"Cutting list sent to {default_email}")
-

@@ -14,11 +14,17 @@
   "description",
   "section_break_lyqm",
   "edging_column",
-  "edging_length",
-  "edging_width",
+  "edging_l1",
+  "edging_l2",
+  "column_break_ufsc",
+  "edging_w1",
+  "edging_w2",
   "grooves_column",
-  "grooves_length",
-  "grooves_width"
+  "grooves_l1",
+  "grooves_l2",
+  "column_break_xhql",
+  "grooves_w2",
+  "grooves_w1"
  ],
  "fields": [
   {
@@ -29,7 +35,7 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "columns": 2,
+   "columns": 1,
    "fieldname": "length",
    "fieldtype": "Float",
    "in_filter": 1,
@@ -41,7 +47,7 @@
   {
    "allow_in_quick_entry": 1,
    "bold": 1,
-   "columns": 2,
+   "columns": 1,
    "fieldname": "width",
    "fieldtype": "Float",
    "in_filter": 1,
@@ -77,64 +83,114 @@
   },
   {
    "fieldname": "edging_column",
-   "fieldtype": "Column Break",
-   "label": "Edging"
-  },
-  {
-   "columns": 1,
-   "default": "0",
-   "fieldname": "edging_length",
-   "fieldtype": "Check",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Edging Length"
-  },
-  {
-   "columns": 1,
-   "default": "0",
-   "fieldname": "edging_width",
-   "fieldtype": "Check",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Edging Width"
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "grooves_column",
-   "fieldtype": "Column Break",
-   "label": "Grooves"
+   "fieldtype": "Column Break"
   },
   {
    "columns": 1,
    "default": "0",
-   "fieldname": "grooves_length",
+   "fieldname": "edging_l1",
    "fieldtype": "Check",
    "in_filter": 1,
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Grooves Length"
+   "label": "Edging L1"
   },
   {
    "columns": 1,
    "default": "0",
-   "fieldname": "grooves_width",
+   "fieldname": "edging_l2",
    "fieldtype": "Check",
    "in_filter": 1,
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Grooves Width"
+   "label": "Edging L2"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "edging_w1",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Edging W1"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "edging_w2",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Edging W2"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "grooves_l1",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Grooves L1"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "grooves_l2",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Grooves L2"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "grooves_w1",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Grooves W1"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "grooves_w2",
+   "fieldtype": "Check",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Grooves W2"
+  },
+  {
+   "fieldname": "column_break_ufsc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_xhql",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-06-09 09:00:46.838839",
+ "modified": "2025-06-10 09:38:20.950007",
  "modified_by": "Administrator",
  "module": "Bazaa",
  "name": "Cutting List Item",

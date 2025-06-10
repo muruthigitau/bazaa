@@ -32,10 +32,14 @@ def create_cutting_list():
                 "width": item.get("width"),
                 "qty": item.get("qty"),
                 "description": item.get("description"),
-                "edging_length": item.get("edging_length") or 0,
-                "edging_width": item.get("edging_width") or 0,
-                "grooves_length": item.get("grooves_length") or 0,
-                "grooves_width": item.get("grooves_width") or 0,
+                "edging_l1": item.get("edging_l1") or 0,
+                "edging_l2": item.get("edging_l2") or 0,
+                "edging_w1": item.get("edging_w1") or 0,
+                "edging_w2": item.get("edging_w2") or 0,
+                "grooves_l1": item.get("grooves_l1") or 0,
+                "grooves_l2": item.get("grooves_l2") or 0,
+                "grooves_w1": item.get("grooves_w1") or 0,
+                "grooves_w2": item.get("grooves_w2") or 0,
             })
 
         # Insert the document
