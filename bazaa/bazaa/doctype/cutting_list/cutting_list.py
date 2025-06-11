@@ -18,18 +18,13 @@ class CuttingList(Document):
 			frappe.msgprint("No default email configured in Sales Settings.")
 			return
 
-		# Prepare top section - customer data
-		customer_data = [
-			["Customer Name", self.customer_name or ""],
-			["Phone", self.customer_phone or ""],
-			["Email", self.customer_email or ""],
-			["Board Type", self.board_type or ""]
-		]
+		# Create document name according to format ack#number#email#boardtype
+		document_name = f"{self.customer_name}#{self.customer_phone}#{self.customer_email or ''}#{self.board_type or ''}"
 
 		# Prepare item headers
-		item_headers = ["Length", "Width", "Qty", "Description",
+		item_headers = ["Length", "Width", "Qty",
 						"Edging L1", "Edging L2", "Edging W1", "Edging W2",
-						"Grooves L1", "Grooves L2", "Grooves W1", "Grooves W2"]
+						"Grooves L1", "Grooves L2", "Grooves W1", "Grooves W2", "Description"]
 
 		# Prepare item data rows
 		item_rows = []
@@ -38,7 +33,6 @@ class CuttingList(Document):
 				item.length,
 				item.width,
 				item.qty,
-				item.description,
 				1 if item.edging_l1 else 0,
 				1 if item.edging_l2 else 0,
 				1 if item.edging_w1 else 0,
@@ -46,23 +40,24 @@ class CuttingList(Document):
 				1 if item.grooves_l1 else 0,
 				1 if item.grooves_l2 else 0,
 				1 if item.grooves_w1 else 0,
-				1 if item.grooves_w2 else 0
+				1 if item.grooves_w2 else 0,
+				item.description,
 			])
 
-		# Combine all into one sheet
-		data = customer_data + [[""]] + [item_headers] + item_rows
+		# Combine headers and rows into one sheet
+		data = [item_headers] + item_rows
 
 		# Create Excel file as BytesIO
 		file_content = make_xlsx(data, "Cutting List")
 
 		# Save to File doctype
-		file_name = f"Cutting List - {self.name}.xlsx"
+		file_name = f"{document_name}.xlsx"
 		saved_file = save_file(file_name, file_content.getvalue(), self.doctype, self.name, is_private=True)
 
 		# Send email immediately
 		frappe.sendmail(
 			recipients=[default_email],
-			subject=f"Cutting List: {self.name}",
+			subject=f"Cutting List: {document_name}",
 			message="Please find the attached cutting list.",
 			attachments=[{
 				"fname": file_name,
