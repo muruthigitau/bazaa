@@ -3,23 +3,27 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils.xlsxutils import make_xlsx
 from frappe.utils.file_manager import save_file
 import io
+import csv
+from datetime import datetime
 
 class CuttingList(Document):
 	def on_submit(self):
-		self.send_cutting_list_excel()
+		self.send_cutting_list_csv()
 
-	def send_cutting_list_excel(self):
+	def send_cutting_list_csv(self):
 		# Get default email from Sales Settings
 		default_email = frappe.db.get_single_value("Sales Settings", "default_email")
 		if not default_email:
 			frappe.msgprint("No default email configured in Sales Settings.")
 			return
 
-		# Create document name according to format ack#number#email#boardtype
-		document_name = f"{self.customer_name}#{self.customer_phone}#{self.customer_email or ''}#{self.board_type or ''}"
+		# Get current date and time in format DDMMYYhhmm
+		current_datetime = datetime.now().strftime("%d%m%y%H%M")
+		
+		# Create document name according to format Name#BoardType#dayandtime
+		document_name = f"{self.customer_name}#{self.board_type or ''}#{current_datetime}"
 
 		# Prepare item headers
 		item_headers = ["Length", "Width", "Qty",
@@ -44,14 +48,17 @@ class CuttingList(Document):
 				item.description,
 			])
 
-		# Combine headers and rows into one sheet
-		data = [item_headers] + item_rows
-
-		# Create Excel file as BytesIO
-		file_content = make_xlsx(data, "Cutting List")
+		# Create CSV file as StringIO
+		csv_buffer = io.StringIO()
+		csv_writer = csv.writer(csv_buffer)
+		csv_writer.writerow(item_headers)
+		csv_writer.writerows(item_rows)
+		
+		# Convert to bytes for file saving
+		file_content = io.BytesIO(csv_buffer.getvalue().encode('utf-8'))
 
 		# Save to File doctype
-		file_name = f"{document_name}.xlsx"
+		file_name = f"{document_name}.csv"
 		saved_file = save_file(file_name, file_content.getvalue(), self.doctype, self.name, is_private=True)
 
 		# Send email immediately
