@@ -50,6 +50,40 @@ def create_sales_order():
         sales_order.insert(ignore_permissions=True)
         sales_order.submit()
         
+         # === Send Email ===
+        default_email = frappe.db.get_single_value("Sales Settings", "default_email")
+        customer_email = data.get("email")  # Optional: fallback to sending to customer if email is in request
+
+        subject = f"New Sales Order: {sales_order.name}"
+        content = f"""
+        A new Sales Order has been created.
+
+        <b>Order ID:</b> {sales_order.name}<br>
+        <b>Customer:</b> {sales_order.customer}<br>
+        <b>Delivery Date:</b> {sales_order.delivery_date}<br><br>
+
+        <b>Items:</b><br>
+        <ul>
+        {''.join(f"<li>{row.item_code} - Qty: {row.qty}, Rate: {row.rate}</li>" for row in sales_order.items)}
+        </ul>
+        """
+
+        # Send to default email
+        if default_email:
+            frappe.sendmail(
+                recipients=[default_email],
+                subject=subject,
+                message=content
+            )
+
+        # Optionally send to customer email if provided
+        if customer_email:
+            frappe.sendmail(
+                recipients=[customer_email],
+                subject=subject,
+                message=content
+            )
+        
         return {
             "id": sales_order.name,
             "status": "success",

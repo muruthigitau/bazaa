@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "autoincrement",
+ "allow_rename": 1,
  "creation": "2025-06-09 08:41:22.644184",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -66,11 +66,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-06-09 09:18:46.810382",
+ "modified": "2025-06-17 08:35:45.390145",
  "modified_by": "Administrator",
  "module": "Bazaa",
  "name": "Cutting List",
- "naming_rule": "Autoincrement",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {

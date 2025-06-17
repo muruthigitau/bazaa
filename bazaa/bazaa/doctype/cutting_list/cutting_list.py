@@ -9,6 +9,14 @@ import csv
 from datetime import datetime
 
 class CuttingList(Document):
+	def autoname(self):
+		# Get current date and time in format DDMMYYhhmm
+		current_datetime = datetime.now().strftime("%d%m%y%H%M")
+		
+		# Create document name according to format Name#BoardType#dayandtime
+		document_name = f"{self.customer_name}#{self.board_type or ''}#{current_datetime}"
+		self.name = document_name  # Set the name of the document
+
 	def on_submit(self):
 		self.send_cutting_list_csv()
 
@@ -19,11 +27,6 @@ class CuttingList(Document):
 			frappe.msgprint("No default email configured in Sales Settings.")
 			return
 
-		# Get current date and time in format DDMMYYhhmm
-		current_datetime = datetime.now().strftime("%d%m%y%H%M")
-		
-		# Create document name according to format Name#BoardType#dayandtime
-		document_name = f"{self.customer_name}#{self.board_type or ''}#{current_datetime}"
 
 		# Prepare item headers
 		item_headers = ["Length", "Width", "Qty",
@@ -58,13 +61,13 @@ class CuttingList(Document):
 		file_content = io.BytesIO(csv_buffer.getvalue().encode('utf-8'))
 
 		# Save to File doctype
-		file_name = f"{document_name}.csv"
+		file_name = f"{self.name}.csv"
 		saved_file = save_file(file_name, file_content.getvalue(), self.doctype, self.name, is_private=True)
 
 		# Send email immediately
 		frappe.sendmail(
 			recipients=[default_email],
-			subject=f"Cutting List: {document_name}",
+			subject=f"Cutting List: {self.name}",
 			message="Please find the attached cutting list.",
 			attachments=[{
 				"fname": file_name,
