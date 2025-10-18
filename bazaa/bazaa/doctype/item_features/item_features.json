@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-10-18 13:06:32.665144",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "feature_type",
+  "column_break_vtkx",
+  "feature"
+ ],
+ "fields": [
+  {
+   "fieldname": "feature_type",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Feature Type",
+   "options": "Item Feature Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vtkx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "feature",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Feature",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-10-18 13:07:24.719884",
+ "modified_by": "Administrator",
+ "module": "Bazaa",
+ "name": "Item Features",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
