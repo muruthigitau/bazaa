@@ -21,6 +21,7 @@ def create_cutting_list():
         cutting_list = frappe.new_doc("Cutting List")
         cutting_list.customer_name = data.get("customer_name")
         cutting_list.customer_email = data.get("customer_email")
+        cutting_list.color = data.get("color")
         cutting_list.customer_phone = data.get("customer_phone")
         cutting_list.board_type = data.get("board_type")
 

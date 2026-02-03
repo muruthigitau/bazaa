@@ -14,7 +14,7 @@ class CuttingList(Document):
 		current_datetime = datetime.now().strftime("%d%m%y%H%M")
 		
 		# Create document name according to format Name#BoardType#dayandtime
-		document_name = f"{self.customer_name}#{self.board_type or ''}#{self.customer_phone}#{current_datetime}"
+		document_name = f"{self.customer_name}#{self.board_type or ''}#{self.color or ''}##{self.customer_phone}#{current_datetime}"
 		self.name = document_name  # Set the name of the document
 
 	def on_submit(self):
